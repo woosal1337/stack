@@ -10,10 +10,10 @@ import { renderJson } from "./render/json.js";
 const VERSION = "0.1.0";
 
 const HELP = `
-${pc.bold("agentstack")} — list every plugin, skill, MCP, agent, command, hook installed for Claude / Codex / Cursor.
+${pc.bold("stack")} — list every plugin, skill, MCP, agent, command, hook installed for Claude / Codex / Cursor.
 
 ${pc.bold("Usage")}
-  agentstack [flags]
+  stack [flags]
 
 ${pc.bold("Flags")}
   --tool <name>       Filter by tool: claude-code | claude-desktop | codex | cursor | project | all
@@ -30,10 +30,10 @@ ${pc.bold("Flags")}
   -v, --version       Show version
 
 ${pc.bold("Examples")}
-  agentstack
-  agentstack --tool claude-code --kind skill
-  agentstack --search compound --json
-  agentstack --versions-only
+  stack
+  stack --tool claude-code --kind skill
+  stack --search compound --json
+  stack --versions-only
 `;
 
 function parseArgs(argv: string[]): CliOptions {
@@ -112,7 +112,7 @@ function main(): void {
     return;
   }
   if (opts.version) {
-    process.stdout.write(`agentstack ${VERSION}\n`);
+    process.stdout.write(`stack ${VERSION}\n`);
     return;
   }
 
@@ -199,7 +199,7 @@ function validateFilters(opts: CliOptions): void {
 }
 
 function fail(message: string): never {
-  process.stderr.write(`agentstack: ${message}\n`);
+  process.stderr.write(`stack: ${message}\n`);
   process.exit(2);
 }
 
@@ -207,6 +207,6 @@ try {
   main();
 } catch (err) {
   const msg = err instanceof Error ? err.message : String(err);
-  process.stderr.write(`agentstack: ${msg}\n`);
+  process.stderr.write(`stack: ${msg}\n`);
   process.exit(1);
 }

@@ -1,9 +1,9 @@
-# agentstack
+# stack
 
 > List every plugin, skill, MCP, agent, command, and hook installed for Claude Code, Claude Desktop, Codex, and Cursor on this machine.
 
 ```
-$ bunx github:woosal1337/agentstack
+$ bunx github:woosal1337/stack
 ```
 
 A single, read-only command that answers "what is actually installed on this machine, across every coding-agent tool I use, and at what version?" Inspired by [`ccusage`](https://github.com/ryoppippi/ccusage).
@@ -18,37 +18,37 @@ The agentic-CLI surface has gotten wide. On one machine you can have:
 - Cursor: MCPs, hooks.
 - Project overlays: `.claude/`, `.mcp.json`, `CLAUDE.md`, `AGENTS.md`.
 
-`agentstack` walks all of those locations and renders a compact, table-style inventory with versions, scope, and sources. It never writes anything.
+`stack` walks all of those locations and renders a compact, table-style inventory with versions, scope, and sources. It never writes anything.
 
 ## Install
 
 No install needed. Run via Bun or Node:
 
 ```bash
-bunx github:woosal1337/agentstack
+bunx github:woosal1337/stack
 # or
-npx github:woosal1337/agentstack
+npx github:woosal1337/stack
 ```
 
 To install locally:
 
 ```bash
-bun install -g github:woosal1337/agentstack
-agentstack
+bun install -g github:woosal1337/stack
+stack
 ```
 
 ## Usage
 
 ```bash
-agentstack                      # full inventory, grouped by tool
-agentstack --tool claude-code   # claude-code only
-agentstack --kind mcp           # MCPs across all tools
-agentstack --kind skill --scope user
-agentstack --search compound    # substring match against name + description
-agentstack --versions-only      # tool/kind/name@version, one per line
-agentstack --json               # machine-readable
-agentstack --doctor             # surface warnings only
-agentstack --no-project         # skip $PWD overlay
+stack                      # full inventory, grouped by tool
+stack --tool claude-code   # claude-code only
+stack --kind mcp           # MCPs across all tools
+stack --kind skill --scope user
+stack --search compound    # substring match against name + description
+stack --versions-only      # tool/kind/name@version, one per line
+stack --json               # machine-readable
+stack --doctor             # surface warnings only
+stack --no-project         # skip $PWD overlay
 ```
 
 ### Flags

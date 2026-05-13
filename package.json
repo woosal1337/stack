@@ -1,10 +1,10 @@
 {
-  "name": "agentstack",
+  "name": "stack",
   "version": "0.1.0",
   "description": "List every Claude Code, Claude Desktop, Codex, and Cursor plugin, skill, MCP, agent, command, and hook installed on this machine.",
   "type": "module",
   "bin": {
-    "agentstack": "./dist/cli.js"
+    "stack": "./dist/cli.js"
   },
   "main": "./dist/cli.js",
   "files": [
@@ -46,12 +46,12 @@
   ],
   "author": "Ege Çelebi <woosal1337@gmail.com> (https://github.com/woosal1337)",
   "license": "MIT",
-  "homepage": "https://github.com/woosal1337/agentstack",
+  "homepage": "https://github.com/woosal1337/stack",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/woosal1337/agentstack.git"
+    "url": "git+https://github.com/woosal1337/stack.git"
   },
   "bugs": {
-    "url": "https://github.com/woosal1337/agentstack/issues"
+    "url": "https://github.com/woosal1337/stack/issues"
   }
 }

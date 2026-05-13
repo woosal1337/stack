@@ -118,7 +118,7 @@ export function renderSummary(results: ScanResult[], opts: { color: boolean }): 
   }
 
   const lines: string[] = [];
-  lines.push(opts.color ? pc.bold(pc.magenta("agentstack — summary")) : "agentstack — summary");
+  lines.push(opts.color ? pc.bold(pc.magenta("stack — summary")) : "stack — summary");
   for (const [tool, kinds] of grouped) {
     const parts = [...kinds.entries()].map(([k, n]) => `${KIND_LABEL[k]} ${n}`).join("  ");
     const label = opts.color ? pc.bold(TOOL_LABEL[tool]) : TOOL_LABEL[tool];
