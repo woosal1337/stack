@@ -145,9 +145,13 @@ function main(): void {
     return;
   }
 
+  const termWidth = process.stdout.columns && process.stdout.columns > 60
+    ? process.stdout.columns
+    : 140;
+
   const blocks: string[] = [];
   for (const r of filtered) {
-    const block = renderResult(r, { color: useColor });
+    const block = renderResult(r, { color: useColor, termWidth });
     if (block) blocks.push(block);
   }
 
