@@ -1,0 +1,57 @@
+{
+  "name": "agentstack",
+  "version": "0.1.0",
+  "description": "List every Claude Code, Claude Desktop, Codex, and Cursor plugin, skill, MCP, agent, command, and hook installed on this machine.",
+  "type": "module",
+  "bin": {
+    "agentstack": "./dist/cli.js"
+  },
+  "main": "./dist/cli.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun build src/cli.ts --target=node --outfile=dist/cli.js --minify && bun run scripts/shebang.ts",
+    "dev": "bun run src/cli.ts",
+    "start": "bun run src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "prepublishOnly": "bun run build"
+  },
+  "dependencies": {
+    "mri": "^1.2.0",
+    "picocolors": "^1.1.1",
+    "smol-toml": "^1.3.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.5",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "codex",
+    "cursor",
+    "mcp",
+    "skills",
+    "plugins",
+    "inventory",
+    "cli"
+  ],
+  "author": "Ege Çelebi <woosal1337@gmail.com> (https://github.com/woosal1337)",
+  "license": "MIT",
+  "homepage": "https://github.com/woosal1337/agentstack",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woosal1337/agentstack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/woosal1337/agentstack/issues"
+  }
+}
