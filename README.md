@@ -1,28 +1,34 @@
+<div align="center">
+
+<img src="./assets/logo.jpg" alt="stack" width="180" />
+
 # stack
 
-> List every plugin, skill, MCP, agent, command, and hook installed for Claude Code, Claude Desktop, Codex, and Cursor on this machine.
+**List every plugin, skill, MCP, agent, command, and hook installed for Claude Code, Claude Desktop, Codex, and Cursor on this machine.**
 
-```
-$ bunx github:woosal1337/stack
-```
+[![ci](https://github.com/woosal1337/stack/actions/workflows/ci.yml/badge.svg)](https://github.com/woosal1337/stack/actions/workflows/ci.yml)
+[![license](https://img.shields.io/github/license/woosal1337/stack?color=blue)](./LICENSE)
+[![node](https://img.shields.io/badge/node-%E2%89%A518-43853d)](https://nodejs.org)
 
-A single, read-only command that answers "what is actually installed on this machine, across every coding-agent tool I use, and at what version?" Inspired by [`ccusage`](https://github.com/ryoppippi/ccusage).
+</div>
+
+A single read-only command that answers *"what is actually installed on this machine, across every coding-agent tool I use, and at what version?"* Inspired by [`ccusage`](https://github.com/ryoppippi/ccusage).
 
 ## Why
 
 The agentic-CLI surface has gotten wide. On one machine you can have:
 
-- Claude Code: plugins, skills (user / project / bundled-in-plugin), MCPs (user, project, plugin), agents, slash commands, hooks, settings overlays.
-- Claude Desktop: a separate MCP config and DXT extensions.
-- Codex: plugins via marketplace, hooks.
-- Cursor: MCPs, hooks.
-- Project overlays: `.claude/`, `.mcp.json`, `CLAUDE.md`, `AGENTS.md`.
+- **Claude Code** — plugins, skills (user / project / bundled-in-plugin), MCPs (user, project, plugin), agents, slash commands, hooks, settings overlays.
+- **Claude Desktop** — a separate MCP config and DXT extensions.
+- **Codex** — plugins via marketplace, hooks.
+- **Cursor** — MCPs, hooks.
+- **Project overlays** — `.claude/`, `.mcp.json`, `CLAUDE.md`, `AGENTS.md`.
 
-`stack` walks all of those locations and renders a compact, table-style inventory with versions, scope, and sources. It never writes anything.
+`stack` walks all of those locations and renders a compact, table-style inventory with versions, scopes, and sources. It never writes anything.
 
 ## Install
 
-No install needed. Run via Bun or Node:
+No install needed. Run via Bun or Node from the public repo:
 
 ```bash
 bunx github:woosal1337/stack
@@ -30,25 +36,48 @@ bunx github:woosal1337/stack
 npx github:woosal1337/stack
 ```
 
-To install locally:
+To install locally as the `stack` command:
 
 ```bash
 bun install -g github:woosal1337/stack
 stack
 ```
 
+## Demo
+
+```text
+Claude Code Plugins  (4)
+┌──────────────────────────────────────┬────────────┬──────────┬────────────────────────────┐
+│ NAME                                 │ VERSION    │ SCOPE    │ SOURCE                     │
+├──────────────────────────────────────┼────────────┼──────────┼────────────────────────────┤
+│ codex                                │ 1.0.4      │ user     │ openai-codex               │
+│ compound-engineering                 │ 3.6.0      │ user     │ compound-engineering-plug… │
+│ discord                              │ 0.0.4      │ user     │ claude-plugins-official    │
+│ frontend-design                      │ —          │ project  │ claude-plugins-official    │
+└──────────────────────────────────────┴────────────┴──────────┴────────────────────────────┘
+
+Claude Code MCPs  (3)
+┌──────────────────────────────┬────────────┬──────────┬─────────────────────────────────┐
+│ NAME                         │ TRANSPORT  │ SCOPE    │ SOURCE                          │
+├──────────────────────────────┼────────────┼──────────┼─────────────────────────────────┤
+│ ebrain                       │ stdio      │ user     │ gbrain serve                    │
+│ linear-server                │ http       │ user     │ https://mcp.linear.app/mcp      │
+│ media-mcp                    │ stdio      │ user     │ node /…/media-mcp/dist/index.js │
+└──────────────────────────────┴────────────┴──────────┴─────────────────────────────────┘
+```
+
 ## Usage
 
 ```bash
-stack                      # full inventory, grouped by tool
-stack --tool claude-code   # claude-code only
-stack --kind mcp           # MCPs across all tools
+stack                       # full inventory, grouped by tool
+stack --tool claude-code    # one tool only
+stack --kind mcp            # MCPs across all tools
 stack --kind skill --scope user
-stack --search compound    # substring match against name + description
-stack --versions-only      # tool/kind/name@version, one per line
-stack --json               # machine-readable
-stack --doctor             # surface warnings only
-stack --no-project         # skip $PWD overlay
+stack --search compound     # substring match against name + description
+stack --versions-only       # tool/kind/name@version, one per line
+stack --json                # machine-readable
+stack --doctor              # surface warnings only
+stack --no-project          # skip $PWD overlay
 ```
 
 ### Flags
@@ -72,7 +101,7 @@ stack --no-project         # skip $PWD overlay
 
 | Tool | Locations |
 |---|---|
-| Claude Code | `~/.claude/plugins/installed_plugins.json`, `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/settings.json`, `~/.claude.json` (mcpServers + per-project), plugin-bundled `agents/` and `commands/` inside `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/` |
+| Claude Code | `~/.claude/plugins/installed_plugins.json`, `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/settings.json`, `~/.claude.json` (mcpServers + per-project), plugin-bundled `agents/`, `commands/`, and `skills/` inside `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/` |
 | Claude Desktop | `~/Library/Application Support/Claude/claude_desktop_config.json`, `~/Library/Application Support/Claude/Claude Extensions/` |
 | Codex | `~/.codex/config.toml` (plugins + marketplaces), `~/.codex/skills/`, `~/.codex/hooks.json` |
 | Cursor | `~/.cursor/mcp.json`, `~/.cursor/hooks.json` |
@@ -80,19 +109,11 @@ stack --no-project         # skip $PWD overlay
 
 Version resolution order per item: manifest `.version` → version segment in install path → marketplace lockfile → `unknown`.
 
-## Output
+## Non-goals
 
-```
-Claude Code Plugins  (4)
-┌────────────────────────────────────┬──────────────┬───────────┬────────────────────────────┐
-│ NAME                               │ VERSION      │ SCOPE     │ SOURCE                     │
-├────────────────────────────────────┼──────────────┼───────────┼────────────────────────────┤
-│ codex                              │ 1.0.4        │ user      │ openai-codex               │
-│ compound-engineering               │ 3.6.0        │ user      │ compound-engineering-pl... │
-│ discord                            │ 0.0.4        │ user      │ claude-plugins-official    │
-│ frontend-design                    │ —            │ project   │ claude-plugins-official    │
-└────────────────────────────────────┴──────────────┴───────────┴────────────────────────────┘
-```
+- **Not a package manager.** `stack` never installs, removes, updates, or modifies anything. Read-only by design.
+- **Not a config validator.** It surfaces what is installed, not whether it's wired up correctly. Use `claude mcp list` or per-tool diagnostics for that.
+- **No telemetry.** No network calls except an optional local `git rev-parse` for version resolution.
 
 ## Develop
 
@@ -104,6 +125,8 @@ bun run typecheck    # tsc --noEmit
 bun run build        # bundle to dist/cli.js with shebang
 ```
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the workflow and code style. Security reports go to [SECURITY.md](./SECURITY.md).
+
 ## License
 
-MIT
+MIT, see [LICENSE](./LICENSE).
