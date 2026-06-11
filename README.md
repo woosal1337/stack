@@ -7,6 +7,7 @@
 **List every plugin, skill, MCP, agent, command, and hook installed for Claude Code, Claude Desktop, Codex, and Cursor on this machine.**
 
 [![ci](https://github.com/woosal1337/stack/actions/workflows/ci.yml/badge.svg)](https://github.com/woosal1337/stack/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/%40woosal1337%2Fstack)](https://www.npmjs.com/package/@woosal1337/stack)
 [![license](https://img.shields.io/github/license/woosal1337/stack?color=blue)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%E2%89%A518-43853d)](https://nodejs.org)
 
@@ -28,22 +29,28 @@ The agentic-CLI surface has gotten wide. On one machine you can have:
 
 ## Install
 
-No install needed. Run via Bun or Node from the public repo:
+No install needed:
 
 ```bash
-bunx github:woosal1337/stack
+npx @woosal1337/stack
 # or
-npx github:woosal1337/stack
+bunx @woosal1337/stack
 ```
 
-To install locally as the `stack` command:
+To install globally as the `stack` command:
 
 ```bash
-bun install -g github:woosal1337/stack
+npm install -g @woosal1337/stack
 stack
 ```
 
+Running straight from the repo also works: `bunx github:woosal1337/stack`.
+
+Works on macOS, Linux, and (experimentally) Windows — Claude Desktop config paths resolve per platform.
+
 ## Demo
+
+![stack demo](./assets/demo.gif)
 
 ```text
 Claude Code Plugins  (4)
@@ -102,7 +109,7 @@ stack --no-project          # skip $PWD overlay
 | Tool | Locations |
 |---|---|
 | Claude Code | `~/.claude/plugins/installed_plugins.json`, `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/settings.json`, `~/.claude.json` (mcpServers + per-project), plugin-bundled `agents/`, `commands/`, and `skills/` inside `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/` |
-| Claude Desktop | `~/Library/Application Support/Claude/claude_desktop_config.json`, `~/Library/Application Support/Claude/Claude Extensions/` |
+| Claude Desktop | `claude_desktop_config.json` and `Claude Extensions/` under `~/Library/Application Support/Claude` (macOS), `%APPDATA%\Claude` (Windows), or `$XDG_CONFIG_HOME/Claude` (Linux) |
 | Codex | `~/.codex/config.toml` (plugins + marketplaces), `~/.codex/skills/`, `~/.codex/hooks.json` |
 | Cursor | `~/.cursor/mcp.json`, `~/.cursor/hooks.json` |
 | Project overlay (current working directory) | `.mcp.json`, `.claude/`, `CLAUDE.md`, `AGENTS.md` |

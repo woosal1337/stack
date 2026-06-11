@@ -1,6 +1,9 @@
 {
-  "name": "stack",
-  "version": "0.1.0",
+  "name": "@woosal1337/stack",
+  "version": "0.2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "List every Claude Code, Claude Desktop, Codex, and Cursor plugin, skill, MCP, agent, command, and hook installed on this machine.",
   "type": "module",
   "bin": {

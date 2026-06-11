@@ -7,7 +7,7 @@ import { scanAll } from "./scanners/index.js";
 import { renderResult, renderSummary } from "./render/table.js";
 import { renderJson } from "./render/json.js";
 
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 
 const HELP = `
 ${pc.bold("stack")} — list every plugin, skill, MCP, agent, command, hook installed for Claude / Codex / Cursor.
