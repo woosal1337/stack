@@ -1,7 +1,19 @@
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-const HOME = homedir();
+const HOME = process.env.STACK_HOME ?? homedir();
+
+function claudeDesktopRoot(): string {
+  if (process.platform === "darwin") {
+    return join(HOME, "Library", "Application Support", "Claude");
+  }
+  if (process.platform === "win32") {
+    return join(process.env.APPDATA ?? join(HOME, "AppData", "Roaming"), "Claude");
+  }
+  return join(process.env.XDG_CONFIG_HOME ?? join(HOME, ".config"), "Claude");
+}
+
+const CLAUDE_DESKTOP_ROOT = claudeDesktopRoot();
 
 export const paths = {
   home: HOME,
@@ -21,16 +33,10 @@ export const paths = {
   },
 
   claudeDesktop: {
-    root: join(HOME, "Library", "Application Support", "Claude"),
-    config: join(HOME, "Library", "Application Support", "Claude", "claude_desktop_config.json"),
-    extensions: join(HOME, "Library", "Application Support", "Claude", "Claude Extensions"),
-    extensionsManifest: join(
-      HOME,
-      "Library",
-      "Application Support",
-      "Claude",
-      "extensions-installations.json",
-    ),
+    root: CLAUDE_DESKTOP_ROOT,
+    config: join(CLAUDE_DESKTOP_ROOT, "claude_desktop_config.json"),
+    extensions: join(CLAUDE_DESKTOP_ROOT, "Claude Extensions"),
+    extensionsManifest: join(CLAUDE_DESKTOP_ROOT, "extensions-installations.json"),
   },
 
   codex: {

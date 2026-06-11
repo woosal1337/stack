@@ -117,7 +117,7 @@ function main(): void {
   }
 
   // mri parses --no-* as false on the positive key, so re-derive:
-  const home = homedir();
+  const home = process.env.STACK_HOME ?? homedir();
   const includeProject = !opts.noProject;
   const useColor = !opts.noColor;
 
