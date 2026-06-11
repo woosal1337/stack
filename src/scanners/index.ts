@@ -40,7 +40,7 @@ export function scanAll(options: ScanOptions): ScanResult[] {
   ];
 
   if (options.includeProject) {
-    results.push(scanProjectOverlay(options));
+    results.push(...scanProjectOverlay(options));
   }
 
   return results;

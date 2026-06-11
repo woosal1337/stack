@@ -9,16 +9,17 @@ interface ProjectMcpFile {
   >;
 }
 
-export function scanProjectOverlay(options: ScanOptions): ScanResult {
+export function scanProjectOverlay(options: ScanOptions): ScanResult[] {
   const warnings: string[] = [];
-  const items: InventoryItem[] = [];
+  const mcpItems: InventoryItem[] = [];
+  const memoryItems: InventoryItem[] = [];
   const p = paths.project(options.cwd);
 
   const mcp = readJson<ProjectMcpFile>(p.mcpJson);
   if (mcp?.mcpServers) {
     for (const [name, server] of Object.entries(mcp.mcpServers)) {
       const transport = server.url ? "http" : server.command ? "stdio" : (server.type ?? "unknown");
-      items.push({
+      mcpItems.push({
         tool: "project",
         kind: "mcp",
         name,
@@ -35,7 +36,7 @@ export function scanProjectOverlay(options: ScanOptions): ScanResult {
   }
 
   if (exists(p.claudeMd)) {
-    items.push({
+    memoryItems.push({
       tool: "project",
       kind: "memory",
       name: "CLAUDE.md",
@@ -45,7 +46,7 @@ export function scanProjectOverlay(options: ScanOptions): ScanResult {
   }
 
   if (exists(p.agentsMd)) {
-    items.push({
+    memoryItems.push({
       tool: "project",
       kind: "memory",
       name: "AGENTS.md",
@@ -54,5 +55,8 @@ export function scanProjectOverlay(options: ScanOptions): ScanResult {
     });
   }
 
-  return { tool: "project", kind: "mcp", items, warnings };
+  return [
+    { tool: "project", kind: "mcp", items: mcpItems, warnings },
+    { tool: "project", kind: "memory", items: memoryItems, warnings: [] },
+  ];
 }
